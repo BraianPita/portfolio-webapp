@@ -34,6 +34,12 @@ let projectSchema = new Schema({
     },
     fork: {
         type: Boolean
+    },
+    category: {
+        type:String
+    },
+    img_url: {
+        type:String
     }
 },
     {
