@@ -5,10 +5,22 @@
 </script>
 
 <script>
+import {backend} from '../assets/backend.js';
+
 export default {
   data() {
     return {
-      port_items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      port_items: []
+    }
+  },
+  created() {
+    this.getProjects();
+  },
+  methods: {
+    getProjects : async function() {
+      var data = await backend.get('/project');
+      console.log(data.data.data);
+      this.port_items = data.data.data;
     }
   }
 }
@@ -18,7 +30,7 @@ export default {
   <div class="port-container">
     <div class="d-flex flex-wrap justify-content-around">
 
-      <PortfolioItem v-for="item in port_items" :key="item" msg="{{item}}" />
+      <PortfolioItem v-for="item in port_items" :key="item" :card_data="item" />
 
     </div>
   </div>

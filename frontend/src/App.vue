@@ -3,21 +3,23 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
+  <main id="app">
+    <header>
+      <div class="wrapper">
 
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
-      <h1 class="green">Braian Pita</h1>
+        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
+        <h1 class="green">Braian Pita</h1>
 
-      <nav>
-        <RouterLink to="/">About</RouterLink>
-        <RouterLink to="/portfolio">Portfolio</RouterLink>
-        <RouterLink to="/contact">Contact</RouterLink>
-      </nav>
-    </div>
-  </header>
+        <nav>
+          <RouterLink to="/">About</RouterLink>
+          <RouterLink to="/portfolio">Portfolio</RouterLink>
+          <RouterLink to="/contact">Contact</RouterLink>
+        </nav>
+      </div>
+    </header>
 
-  <RouterView />
+    <RouterView />
+  </main>
 </template>
 
 <style>
@@ -78,12 +80,21 @@ nav a.router-link-exact-active {
 }
 
 nav a.router-link-exact-active:hover {
+  font-size: 0.75rem;
   background-color: transparent;
+  color: var(--color-text);
 }
 
 nav a {
   display: inline-block;
   padding: 0 1rem;
+  text-decoration: none;
+  color: aquamarine;
+}
+nav a:hover {
+  font-size: 0.9rem;
+  background-color: transparent;
+  color:aqua;
 }
 
 nav a:first-of-type {
@@ -136,6 +147,16 @@ nav a:first-of-type {
     font-size: 1.5rem;
 
     margin-right: 2rem;
+  }
+
+  nav a:hover {
+    font-size: 1.75rem;
+    color:aqua;
+  }
+
+  nav a.router-link-exact-active:hover {
+    font-size: 1.5rem;
+    color: var(--color-text);
   }
 }
 </style>

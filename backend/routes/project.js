@@ -2,17 +2,16 @@ const router = require("express").Router();
 const axios = require("axios");
 
 // Get mongoose model for handling schema
-const clientModel = require('../models/clients');
-const activityModel = require('../models/activity');
+const projectModel = require('../models/Project');
 
 // this route is equivalent to "/clients" post method
 router.post("/", (req, res, next) => {
 
-    // Create a new client document using the mongoose schema for validation
-    clientModel.create(req.body, (err, data) => {
+    // Create a new project document using the mongoose schema for validation
+    projectModel.create(req.body, (err, data) => {
         if (err) next(err);
 
-        else res.json({"message":'New client added.'});
+        else res.json({"message":'New project added.'});
     });    
 });
 
@@ -20,7 +19,7 @@ router.post("/", (req, res, next) => {
 router.get("/", (req, res, next) => {
 
     // get all clients
-    clientModel.find((err, data) => {
+    projectModel.find((err, data) => {
         if (err) {
             // handle error
             next(err);

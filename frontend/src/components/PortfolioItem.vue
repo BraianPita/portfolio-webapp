@@ -1,19 +1,20 @@
 <script setup>
 defineProps({
-  msg: {
+  card_data: {
     type: String,
     required: true
   }
 })
 </script>
 
+
 <template>
   <div class="card">
-    <img src="../assets/img/no_image.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title project-stopped">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+    <img :src="card_data.img_url || '/img/no_image.jpg'" class="card-img-top" alt="...">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title project-stopped">{{card_data.name || card_data.repository.full_name}}</h5>
+      <p class="card-text">{{card_data.repository.description}}</p>
+      <a :href="repo_link" target="_blank" class="btn btn-primary mt-auto">Open Repo</a>
     </div>
   </div>
 </template>

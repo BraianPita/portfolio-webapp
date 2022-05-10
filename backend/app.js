@@ -5,10 +5,10 @@ const { MongoClient } = require("mongodb");
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const fs = require('fs');
-var cors = require('cors')
+var cors = require('cors');
 
 // needed for API call from frontend
-app.use(cors())
+app.use(cors());
 
 // Load dotenv environment variables
 require('dotenv').config();
@@ -24,7 +24,6 @@ app.use(express.json());
 const port = 3001;
 
 // MongoDB Connection
-let studentsDB;
 // get secret connection string from env variable
 let connectionString = process.env.MONGO_URL;
 let dbName = 'Portfolio';
@@ -43,6 +42,10 @@ mongoose
             if (err) throw err;
 
             files.forEach(function(file) {
+                if (file.startsWith('exclude.')) {
+                    return;
+                }
+
                 // load router
                 let routerFile = require('./routes/' + file);
 

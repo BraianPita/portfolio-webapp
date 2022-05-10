@@ -7,6 +7,9 @@ let projectSchema = new Schema({
         type: String,
         default: () => uuid.v4().replace(/-/gi, '')
     },
+    name: {
+        type:String,
+    },
     owner: {
         login: {
             type: String,
@@ -20,23 +23,27 @@ let projectSchema = new Schema({
             type: String
         }
     },
-    name: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String
-    },
-    html_url: {
-        type:String,
-        required:true,
-        unique:true
-    },
-    fork: {
-        type: Boolean
+    repository: {
+        full_name: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String
+        },
+        html_url: {
+            type:String,
+            required:true,
+            unique:true,
+            index:true
+        },
+        fork: {
+            type: Boolean
+        }
     },
     category: {
-        type:String
+        type:String,
+        enum: ['personal', 'academic', 'professional']
     },
     img_url: {
         type:String
