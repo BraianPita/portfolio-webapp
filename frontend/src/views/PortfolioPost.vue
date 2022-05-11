@@ -1,4 +1,7 @@
 <script>
+
+import {backend} from '../assets/backend';
+
 export default {
     created() {
         this.getPostData();
@@ -10,22 +13,25 @@ export default {
         },
     data() {
         return {
-            post_data: {}
+            post_data: undefined
         }
     },
     methods: {
-        getPostData: function() {
+        getPostData: async function() {
             var post_id = this.$route.params.id;
-            console.log(post_id);
-            this.post_data = post_id;
+            
+            var response = await backend.get('/project/' + post_id);
+
+            this.post_data = response.data;
         }
     }
 }
 </script>
 
 <template>
-    <div class="port-post">
-        <h1>{{this.post_data}}</h1>
+    <div class="port-post" v-if="this.post_data !== undefined">
+        <h1>{{this.post_data.repository.full_name}}</h1>
+        <p>by: {{this.post_data.owner.login}} -- {{this.post_data}}</p>
         <hr>
     </div>
 </template>
