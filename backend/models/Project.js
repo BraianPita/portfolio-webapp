@@ -38,21 +38,6 @@ let projectSchema = new Schema({
                 type: String
             }
         }
-    },
-    post: {
-        title: {
-            type:String
-        },
-        category: {
-            type:String,
-            enum: ['personal', 'academic', 'professional']
-        },
-        img_url: {
-            type:String
-        },
-        content: {
-            type:String
-        }
     }
 },
     {
