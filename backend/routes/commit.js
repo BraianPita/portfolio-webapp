@@ -2,17 +2,16 @@ const router = require("express").Router();
 const axios = require("axios");
 
 // Get mongoose model for handling schema
-const projectModel = require('../models/Project');
-const commitModel = require('../models/Commit')
+const commitModel = require('../models/commit');
 
 // this route is equivalent to "/clients" post method
 router.post("/", (req, res, next) => {
 
-    // Create a new project document using the mongoose schema for validation
-    projectModel.create(req.body, (err, data) => {
+    // Create a new commit document using the mongoose schema for validation
+    commitModel.create(req.body, (err, data) => {
         if (err) next(err);
 
-        else res.json({"message":'New project added.'});
+        else res.json({"message":'New commit added.'});
     });    
 });
 
@@ -20,7 +19,7 @@ router.post("/", (req, res, next) => {
 router.get("/", (req, res, next) => {
 
     // get all clients
-    projectModel.find((err, data) => {
+    commitModel.find((err, data) => {
         if (err) {
             // handle error
             next(err);
@@ -32,23 +31,6 @@ router.get("/", (req, res, next) => {
 
 });
 
-// get one client by id (_id)
-router.get("/:id", (req, res, next) => {
-
-    var id = req.params.id;
-
-    projectModel.findOne({_id: id}, (err, data) => {
-        if (err) {
-            // handle error
-            next(err);
-        }
-        else if (data === null) res.status(404).json({"message":"Project not found."});
-
-        else res.json(data);
-    });
-
-});
-
 // route to update a client with specific id
 router.put("/:id", (req, res, next) => {
 
@@ -56,7 +38,7 @@ router.put("/:id", (req, res, next) => {
     var id = req.params.id;
 
     // update code
-    projectModel.updateOne({_id: id}, req.body, {multi:true}, (err, data) => {
+    commitModel.updateOne({_id: id}, req.body, {multi:true}, (err, data) => {
         if (err) next(err);
 
         // if there is a modified item from the query
@@ -75,7 +57,7 @@ router.delete("/:id", (req, res, next) => {
     var id = req.params.id;
 
     // delete code
-    projectModel.deleteOne({_id: id}, (err, data) => {
+    commitModel.deleteOne({_id: id}, (err, data) => {
 
         if (err) next(err);
 
@@ -87,27 +69,5 @@ router.delete("/:id", (req, res, next) => {
     });
 
 });
-
-// get commits for specific project
-router.get("/commits/:id", (req, res, next) => {
-
-    var id = req.params.id;
-
-    projectModel.findOne({_id: id}, (err, repo) => {
-        if (err) {
-            // handle error
-            next(err);
-        }
-        else if (repo === null) res.status(404).json({"message":"Project not found."});
-
-        else commitModel.aggregate([{$match: {"repository.html_url": repo.repository.html_url}}]).exec((err, data) => {
-            if (err) next(err);
-
-            else res.json(data);
-        })
-    });
-
-});
-
 
 module.exports = router;

@@ -39,4 +39,4 @@ let commitSchema = new Schema({
         collection: 'commit'
     });
 
-module.exports = mongoose.model('commit', commitSchema)
+module.exports = mongoose.models.commit || mongoose.model('commit', commitSchema)

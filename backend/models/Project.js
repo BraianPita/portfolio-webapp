@@ -56,4 +56,4 @@ let projectSchema = new Schema({
 projectSchema.index({"repository.html_url": 1}, {unique: true})
 
 
-module.exports = mongoose.model('project', projectSchema)
+module.exports = mongoose.models.project || mongoose.model('project', projectSchema)
