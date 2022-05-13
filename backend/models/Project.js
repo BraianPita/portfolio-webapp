@@ -10,7 +10,7 @@ let projectSchema = new Schema({
     name: {
         type:String,
     },
-    owner: {
+    author: {
         login: {
             type: String,
             required: true,
