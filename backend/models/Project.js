@@ -20,7 +20,6 @@ let projectSchema = new Schema({
         },
         html_url: {
             type:String,
-            required:true,
             unique:true,
             index:true
         },
@@ -40,15 +39,20 @@ let projectSchema = new Schema({
             }
         }
     },
-    category: {
-        type:String,
-        enum: ['personal', 'academic', 'professional']
-    },
-    img_url: {
-        type:String
-    },
-    content: {
-        type:String
+    post: {
+        title: {
+            type:String
+        },
+        category: {
+            type:String,
+            enum: ['personal', 'academic', 'professional']
+        },
+        img_url: {
+            type:String
+        },
+        content: {
+            type:String
+        }
     }
 },
     {
