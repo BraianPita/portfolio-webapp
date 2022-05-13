@@ -53,4 +53,8 @@ let projectSchema = new Schema({
         collection: 'project'
     });
 
+
+projectSchema.index({"repository.html_url": 1}, {unique: true})
+
+
 module.exports = mongoose.model('project', projectSchema)
