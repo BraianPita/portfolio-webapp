@@ -18,12 +18,12 @@
 <style>
 
   .home {
-    height: 100%;
+    height: fit-content;
     width: 100vw;
     display: grid;
     grid-template-columns: 100%;
 
-    overflow: scroll;
+    overflow-x: hidden;
   }
 
   .home .grid-column {

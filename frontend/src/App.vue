@@ -32,7 +32,7 @@ import { RouterLink, RouterView } from 'vue-router'
   width: 100vw;
 
   font-weight: normal;
-  overflow: hidden;
+  overflow-x: hidden;
 
   color: var(--color-text);
   background: var(--color-background);

@@ -28,7 +28,7 @@ export default {
 
 <template>
   <div class="port-container">
-    <div class="d-flex flex-wrap justify-content-around">
+    <div class="d-flex flex-wrap justify-content-left px-5">
 
       <PortfolioItem v-for="item in port_items" :key="item" :card_data="item" />
 
@@ -40,7 +40,7 @@ export default {
 
 @media (min-width: 1024px) {
   .port-container {
-    height: 100vh;
+    height: fit-content;
     width: 100vw;
     padding: 1rem;
     display: block;
