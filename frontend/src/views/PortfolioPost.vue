@@ -4,7 +4,13 @@ import {backend} from '../assets/backend';
 
 export default {
     created() {
+
+        this.post_id = this.$route.params.id;
+
+        // get data
         this.getPostData();
+        this.getCommits();
+
         this.$watch(
         () => this.$route.params,
         (toParams, previousParams) => {
@@ -13,15 +19,15 @@ export default {
         },
     data() {
         return {
+            post_id: undefined,
             post_data: undefined,
             commits: []
         }
     },
     methods: {
         getPostData: async function() {
-            var post_id = this.$route.params.id;
             
-            var response = await backend.get('/project/' + post_id);
+            var response = await backend.get('/project/' + this.post_id);
 
             this.post_data = response.data;
         },
@@ -29,7 +35,7 @@ export default {
             return this.post_data.repository.full_name.split('/').pop();
         },
         getCommits: async function() {
-            var response = await backend.get('/commit/' + post_id);
+            var response = await backend.get('/project/commits/' + this.post_id);
 
             this.commits = response.data;
         }
@@ -42,6 +48,11 @@ export default {
         <h1>{{this.post_data.name || getRepoName()}}</h1>
         <p>by: {{this.post_data.repository.owner.login}} -- {{this.post_data}}</p>
         <hr>
+
+        <div class="card bg-dark m-3 p-3" v-for="commit in commits" :key="commit">{{commit.commit.author.name}} - {{commit.commit.author.date}}
+            <hr>
+            {{commit.commit.message}}
+        </div>
     </div>
 </template>
 

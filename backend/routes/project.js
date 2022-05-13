@@ -100,7 +100,10 @@ router.get("/commits/:id", (req, res, next) => {
         }
         else if (repo === null) res.status(404).json({"message":"Project not found."});
 
-        else commitModel.aggregate([{$match: {"repository.html_url": repo.repository.html_url}}]).exec((err, data) => {
+        else commitModel.aggregate([
+            {$match: {"repository.html_url": repo.repository.html_url}},
+            {$sort: {"commit.author.date": -1}}])
+            .exec((err, data) => {
             if (err) next(err);
 
             else res.json(data);
