@@ -30,7 +30,6 @@ let projectSchema = new Schema({
         owner: {
             login: {
                 type: String,
-                required: true,
                 default: "BraianPita"
             },
             avatar_url: {
@@ -47,6 +46,19 @@ let projectSchema = new Schema({
     },
     img_url: {
         type:String
+    },
+    author: {
+        login: {
+            type: String,
+            required: true,
+            default: "BraianPita"
+        },
+        avatar_url: {
+            type: String
+        },
+        html_url: {
+            type: String
+        }
     }
 },
     {
