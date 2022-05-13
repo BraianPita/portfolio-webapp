@@ -29,16 +29,18 @@ let postSchema = new Schema({
     },
     repo_url: {
         type:String,
-        ref: 'project'
     }
-
 },
     {
         collection: 'post'
     });
 
 
-
+postSchema.virtual('repo_url', {
+    ref: 'project', // ref model to use
+    localField: 'repo_url', // field in mealSchema
+    foreignField: 'repository.html_url', // The field in meatSchema. 
+});
 
 
 module.exports = mongoose.models.post || mongoose.model('post', postSchema)
