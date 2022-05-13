@@ -46,13 +46,16 @@ export default {
 <template>
     <div class="port-post" v-if="this.post_data !== undefined">
         <h1>{{this.post_data.name || getRepoName()}}</h1>
-        <p>by: {{this.post_data.repository.owner.login}} -- {{this.post_data}}</p>
+        <p>by: {{this.post_data.repository.owner.login}} <!-- -- {{this.post_data}}-->   </p>
         <hr>
 
+
+        <h2>Recent Commits</h2>
         <div class="card bg-dark m-3 p-3" v-for="commit in commits" :key="commit">{{commit.commit.author.name}} - {{commit.commit.author.date}}
-            <hr>
+            <hr class="mt-0">
             {{commit.commit.message}}
         </div>
+
     </div>
 </template>
 

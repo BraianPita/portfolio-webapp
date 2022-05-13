@@ -46,6 +46,9 @@ let projectSchema = new Schema({
     },
     img_url: {
         type:String
+    },
+    content: {
+        type:String
     }
 },
     {
