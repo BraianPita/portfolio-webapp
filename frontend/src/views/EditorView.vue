@@ -1,5 +1,8 @@
 <script>
 export default {
+    created(){
+        this.getProjects();
+    },
     data() {
         return {
             post: {
@@ -7,7 +10,15 @@ export default {
                 content: "",
                 date_created: new Date().toLocaleString('en-us'),
                 img_url: undefined
-            }
+            },
+            projects: []
+        }
+    },
+    methods: {
+        getProjects: async function() {
+            var response = await this.$backend.get("/project");
+            console.log(response.data);
+            this.projects = response.data;
         }
     }
 }
@@ -20,7 +31,10 @@ export default {
                 <form action="POST" class="d-flex flex-column">
                     
                     <div class="d-flex flex-row mb-3">
-                        <input type="url" placeholder="Github Repository Link" class="form-control border-secondary me-2">
+                        <select name="repo_url" id="repo_url">
+                            <option value="" selected>Select Repository</option>
+                            <option v-for="repo in projects" :key="repo" :value="repo.repository.html_url">{{repo.repository.full_name}}</option>
+                        </select>
                         <select class="form-control border-secondary me-2 w-50" name="project-category" id="project-category">
                             <option value="" selected>Select Category</option>
                             <option value="personal">Personal</option>
@@ -45,7 +59,6 @@ export default {
 
                 <div v-html="markdownToHTML(this.post.content)" class="lead">
                 </div>
-
             </div>
         </div>
     </div>

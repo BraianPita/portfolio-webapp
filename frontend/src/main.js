@@ -10,7 +10,7 @@ import "bootstrap"
 const app = createApp(App)
 
 
-// global imports
+// global functions
 import {marked} from 'marked';
 
 
@@ -23,6 +23,12 @@ const methodsMixin = {
 }
 
 app.mixin(methodsMixin);
+
+// global imports
+import {backend} from './assets/backend'
+
+
+app.config.globalProperties.$backend = backend
 
 app.use(router)
 

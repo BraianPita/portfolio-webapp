@@ -26,7 +26,7 @@ router.get("/", (req, res, next) => {
             next(err);
         }
         else {
-            res.json({data:data});
+            res.json(data);
         }
     });
 

@@ -5,8 +5,6 @@
 </script>
 
 <script>
-import {backend} from '../assets/backend.js';
-
 export default {
   data() {
     return {
@@ -18,9 +16,9 @@ export default {
   },
   methods: {
     getProjects : async function() {
-      var data = await backend.get('/project');
-      console.log(data.data.data);
-      this.port_items = data.data.data;
+      var response = await this.$backend.get('/project');
+      
+      this.port_items = response.data;
     }
   }
 }
