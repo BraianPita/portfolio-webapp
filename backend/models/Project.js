@@ -10,19 +10,6 @@ let projectSchema = new Schema({
     name: {
         type:String,
     },
-    author: {
-        login: {
-            type: String,
-            required: true,
-            default: "BraianPita"
-        },
-        avatar_url: {
-            type: String
-        },
-        html_url: {
-            type: String
-        }
-    },
     repository: {
         full_name: {
             type: String,
@@ -39,6 +26,19 @@ let projectSchema = new Schema({
         },
         fork: {
             type: Boolean
+        },
+        owner: {
+            login: {
+                type: String,
+                required: true,
+                default: "BraianPita"
+            },
+            avatar_url: {
+                type: String
+            },
+            html_url: {
+                type: String
+            }
         }
     },
     category: {
