@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import PortfolioView from '../views/PortfolioView.vue'
 import PortfolioPost from '../views/PortfolioPost.vue'
 import ContactView from '../views/ContactView.vue'
+import EditorView from '../views/EditorView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,7 +25,13 @@ const router = createRouter({
     name: 'contact',
     props: true,
     component: ContactView
-  }]
+  }, {
+    path: '/editor/:id',
+    name: 'editor',
+    props: true,
+    component: EditorView
+  }
+]
 })
 
 export default router
