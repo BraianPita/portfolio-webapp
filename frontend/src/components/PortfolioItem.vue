@@ -7,6 +7,16 @@ defineProps({
 })
 </script>
 
+<script>
+export default {
+  methods: {
+    getRepoName: function() {
+      return this.card_data.repository.full_name.split("/").pop();
+    }
+  }
+}
+</script>
+
 
 <template>
   <a :href="'/post/' + card_data._id" class="card">
@@ -14,9 +24,15 @@ defineProps({
     <div class="card-body d-flex flex-column">
       <h5 class="card-title project-stopped">{{card_data.name || card_data.repository.full_name}}</h5>
       <p class="card-text">{{card_data.repository.description}}</p>
-      <a :href="card_data.author.html_url" target="_blank" class="mt-auto mx-auto card p-2 flex-row" style="background-color: #333; width: 100%; margin: 0">
-          <img :src="this.card_data.author.avatar_url" alt="avatar" class = "avatar-img ms-2"> <p class="my-auto mx-auto">{{this.card_data.author.login}}</p>
+
+      <hr class="mb-1 mt-auto">
+
+      <strong class="text-center">{{getRepoName()}}</strong>
+
+      <a :href="card_data.author.html_url" target="_blank" class="mx-auto card p-2 flex-row" style="background-color: #333; width: 100%; margin: 0">
+          <img :src="this.card_data.repository.owner.avatar_url" alt="avatar" class = "avatar-img ms-2"> <p class="my-auto mx-auto">{{this.card_data.repository.owner.login}}</p>
       </a> 
+
     </div>
   </a>
 </template>

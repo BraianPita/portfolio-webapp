@@ -13,7 +13,8 @@ export default {
         },
     data() {
         return {
-            post_data: undefined
+            post_data: undefined,
+            commits: []
         }
     },
     methods: {
@@ -23,6 +24,14 @@ export default {
             var response = await backend.get('/project/' + post_id);
 
             this.post_data = response.data;
+        },
+        getRepoName: function() {
+            return this.post_data.repository.full_name.split('/').pop();
+        },
+        getCommits: async function() {
+            var response = await backend.get('/commit/' + post_id);
+
+            this.commits = response.data;
         }
     }
 }
@@ -30,8 +39,8 @@ export default {
 
 <template>
     <div class="port-post" v-if="this.post_data !== undefined">
-        <h1>{{this.post_data.repository.full_name}}</h1>
-        <p>by: {{this.post_data.owner.login}} -- {{this.post_data}}</p>
+        <h1>{{this.post_data.name || getRepoName()}}</h1>
+        <p>by: {{this.post_data.repository.owner.login}} -- {{this.post_data}}</p>
         <hr>
     </div>
 </template>
