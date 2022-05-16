@@ -71,7 +71,7 @@ a,
 }
 
 nav {
-  font-size: 12px;
+  font-size: calc(12px + 1.5vw);
   text-align: center;
 }
 
@@ -80,19 +80,19 @@ nav a.router-link-exact-active {
 }
 
 nav a.router-link-exact-active:hover {
-  font-size: 0.75rem;
+  font-size: calc(14px + 1.6vw);
   background-color: transparent;
   color: var(--color-text);
 }
 
 nav a {
   display: inline-block;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   text-decoration: none;
   color: aquamarine;
 }
 nav a:hover {
-  font-size: 0.9rem;
+  font-size: calc(14px + 1.6vw);
   background-color: transparent;
   color:aqua;
 }
