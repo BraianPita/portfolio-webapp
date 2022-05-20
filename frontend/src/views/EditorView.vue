@@ -2,6 +2,7 @@
 export default {
     created(){
         this.getProjects();
+        this.getCurrentPost();
     },
     data() {
         return {
@@ -19,6 +20,14 @@ export default {
             var response = await this.$backend.get("/project");
             console.log(response.data);
             this.projects = response.data;
+        },
+        getCurrentPost: async function() {
+            if (this.$route.params.id) {
+                console.log(this.$route.params.id)
+            }
+            else {
+                console.log("New post.")
+            }
         }
     }
 }

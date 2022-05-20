@@ -26,7 +26,7 @@ const router = createRouter({
     props: true,
     component: ContactView
   }, {
-    path: '/editor/:id',
+    path: '/editor/:id?',
     name: 'editor',
     props: true,
     component: EditorView

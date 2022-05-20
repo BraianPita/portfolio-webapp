@@ -27,8 +27,7 @@ app.mixin(methodsMixin);
 // global imports
 import {backend} from './assets/backend'
 
-
-app.config.globalProperties.$backend = backend
+app.config.globalProperties.$backend = backend;
 
 app.use(router)
 
