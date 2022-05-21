@@ -25,8 +25,25 @@ router.get("/", (req, res, next) => {
             next(err);
         }
         else {
-            res.json({data:data});
+            res.json(data);
         }
+    });
+
+});
+
+// get one client by id (_id)
+router.get("/:id", (req, res, next) => {
+
+    var id = req.params.id;
+
+    postModel.findOne({_id: id}, (err, data) => {
+        if (err) {
+            // handle error
+            next(err);
+        }
+        else if (data === null) res.status(404).json({"message":"Project not found."});
+
+        else res.json(data);
     });
 
 });

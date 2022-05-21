@@ -16,9 +16,11 @@ export default {
   },
   methods: {
     getProjects : async function() {
-      var response = await this.$backend.get('/project');
+      var response = await this.$backend.get('/blogpost/');
       
       this.port_items = response.data;
+
+      console.log(this.port_items)
     }
   }
 }

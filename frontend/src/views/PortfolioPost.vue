@@ -9,7 +9,7 @@ export default {
 
         // get data
         this.getPostData();
-        this.getCommits();
+        //this.getCommits();
 
         this.$watch(
         () => this.$route.params,
@@ -27,7 +27,7 @@ export default {
     methods: {
         getPostData: async function() {
             
-            var response = await backend.get('/project/' + this.post_id);
+            var response = await backend.get('/blogpost/' + this.post_id);
 
             this.post_data = response.data;
         },
@@ -45,9 +45,11 @@ export default {
 
 <template>
     <div class="port-post" v-if="this.post_data !== undefined">
-        <h1>{{this.post_data.name || getRepoName()}}</h1>
-        <p>by: {{this.post_data.repository.owner.login}} <!-- -- {{this.post_data}}-->   </p>
+        <h1>{{this.post_data.title}}</h1>
+        <p>Posted on: {{this.post_data.date_posted.toLocaleString('en-us').split('T')[0]}} <!-- -- {{this.post_data}}-->   </p>
         <hr>
+
+        <div v-html="markdownToHTML(this.post_data.content)" class="lead"></div>
 
 
         <h2>Recent Commits</h2>
