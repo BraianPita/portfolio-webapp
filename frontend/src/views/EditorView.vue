@@ -1,18 +1,27 @@
 <script>
 export default {
     created(){
+        if (this.$route.params.id) {
+            this.isNewPost = false;
+        }
+
         this.getProjects();
         this.getCurrentPost();
     },
     data() {
         return {
             post: {
-                title: "",
+                title: undefined,
                 content: "",
-                date_created: new Date().toLocaleString('en-us'),
-                img_url: undefined
+                date_posted: undefined,
+                img_url: undefined,
+                category: undefined,
+                date_updated: undefined,
+                repository: undefined
             },
-            projects: []
+            projects: [],
+            isNewPost: true
+
         }
     },
     methods: {
@@ -22,12 +31,20 @@ export default {
             this.projects = response.data;
         },
         getCurrentPost: async function() {
-            if (this.$route.params.id) {
-                console.log(this.$route.params.id)
+            if (this.isNewPost) {
+                console.log("New post.");
+                this.post.date_created = new Date().toLocaleString('en-us');
             }
             else {
-                console.log("New post.")
+                console.log(this.$route.params.id);
+                this.post.date_updated = new Date().toLocaleString('en-us');
             }
+        },
+        submitForm: async function() {
+            console.log("submitting");
+            let response = await this.$backend.post("/blogpost/", this.post);
+
+            console.log(response);
         }
     }
 }
@@ -37,25 +54,24 @@ export default {
     <div id="editor" class="container-flex">
         <div class="row p-5">
             <div class="col-lg-6">
-                <form action="POST" class="d-flex flex-column">
-                    
+                <form class="d-flex flex-column">
                     <div class="d-flex flex-row mb-3">
-                        <select name="repo_url" id="repo_url">
+                        <select name="repo_url" id="repo_url" v-model="this.post.repository">
                             <option value="" selected>Select Repository</option>
-                            <option v-for="repo in projects" :key="repo" :value="repo.repository.html_url">{{repo.repository.full_name}}</option>
+                            <option v-for="repo in projects" :key="repo" :value="repo._id">{{repo.repository.full_name}}</option>
                         </select>
-                        <select class="form-control border-secondary me-2 w-50" name="project-category" id="project-category">
+                        <select v-model="this.post.category" class="form-control border-secondary me-2 w-50" name="project-category" id="project-category" required>
                             <option value="" selected>Select Category</option>
                             <option value="personal">Personal</option>
                             <option value="school">School</option>
                             <option value="professional">Professional</option>
                         </select>
-                        <button class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary" type="button" @click="submitForm">Submit</button>
                     </div>
 
-                    <input type="text" placeholder="Title" class="form-control border-secondary rounded-0 border-0 border-bottom" v-model="this.post.title">
+                    <input type="text" placeholder="Title" class="form-control border-secondary rounded-0 border-0 border-bottom" v-model="this.post.title" required>
                     <input type="text" placeholder="Main Image URL" class="form-control border-secondary rounded-0 border-0 border-bottom" v-model="this.post.img_url">
-                    <textarea class="form-control" name="post-content" id="post-content" v-model="this.post.content"></textarea>
+                    <textarea class="form-control" name="post-content" id="post-content" v-model="this.post.content" required></textarea>
                 </form>
             </div>
             <div class="col-lg-6" >
