@@ -63,7 +63,7 @@ export default {
                         <select v-model="this.post.category" class="form-control border-secondary me-2 w-50" name="project-category" id="project-category" required>
                             <option value="" selected>Select Category</option>
                             <option value="personal">Personal</option>
-                            <option value="school">School</option>
+                            <option value="academic">Academic</option>
                             <option value="professional">Professional</option>
                         </select>
                         <button class="btn btn-primary" type="button" @click="submitForm">Submit</button>
