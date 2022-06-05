@@ -38,6 +38,10 @@ export default {
             else {
                 console.log(this.$route.params.id);
                 this.post.date_updated = new Date().toLocaleString('en-us');
+
+                let response = await this.$backend.get('/blogpost/' + this.$route.params.id);
+                
+                this.post = response.data;
             }
         },
         submitForm: async function() {
