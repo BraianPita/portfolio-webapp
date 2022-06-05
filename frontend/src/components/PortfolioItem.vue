@@ -22,10 +22,13 @@ export default {
   <a :href="'/post/' + card_data._id" class="card">
     <img :src="card_data.img_url || '/img/no_image.jpg'" class="card-img-top" alt="...">
     <div class="card-body d-flex flex-column">
-      <h5 class="card-title project-stopped">{{card_data.title}}</h5>
-      <p class="card-text">{{card_data.category}}</p>
+
+      <p class="card-text project-stopped m-0">{{card_data.category}}</p>
+      <h6 class="card-title">{{card_data.title}}</h6>
+      
 
       <hr class="mb-1 mt-auto">
+      
 <!---
       <strong class="text-center">{{getRepoName()}}</strong>
 
@@ -42,8 +45,8 @@ export default {
     background-color: var(--color-background-mute);
     border-radius: 10px;
     margin: 1rem;
-    min-width: 200px;
-    width: 18rem;
+    min-width: 150px;
+    width: 15rem;
     color: var(--text-color);
     text-decoration: none;
   }
