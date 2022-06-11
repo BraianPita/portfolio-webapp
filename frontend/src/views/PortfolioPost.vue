@@ -51,9 +51,14 @@ export default {
     <div class="port-post row" v-if="this.post_data !== undefined">
 
         <div class="col-md-8">
-            <h1>{{this.post_data.title}}</h1>
+            <div class="d-flex">
+                <h1>{{this.post_data.title}}</h1>
+                <a class="btn btn-primary ms-auto mt-auto" :href="'/editor/' + this.post_data._id">Edit</a>
+            </div>
             <p>Posted on: {{this.post_data.date_posted.toLocaleString('en-us').split('T')[0]}} <!-- -- {{this.post_data}}-->   </p>
             <hr>
+
+            <img :src="this.post_data.img_url" alt="Main Image" class="img-fluid">
 
             <div v-html="markdownToHTML(this.post_data.content)" class="lead"></div>
         </div>

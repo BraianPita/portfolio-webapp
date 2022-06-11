@@ -46,9 +46,14 @@ export default {
         },
         submitForm: async function() {
             console.log("submitting");
-            let response = await this.$backend.post("/blogpost/", this.post);
-
-            console.log(response);
+            if (this.isNewPost) {
+                let response = await this.$backend.post("/blogpost/", this.post);
+                console.log(response);
+            }
+            else {
+                let response = await this.$backend.put("/blogpost/" + this.post._id, this.post);
+                console.log(response);
+            }
         }
     }
 }
