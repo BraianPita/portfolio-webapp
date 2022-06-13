@@ -63,15 +63,19 @@ export default {
             <div v-html="markdownToHTML(this.post_data.content)" class="lead"></div>
         </div>
 
-        <div class="col-md-4">
+        <div class="position-absolute col-md-4" style="height:100%; right: 0;">
             <h2>Recent Commits</h2>
-            <div class="card m-3 p-3 commit-card" v-for="commit in commits" :key="commit">
-            {{commit.commit.author.name}} <br> 
-            <p>{{commit.commit.author.date.split('T')[0]}} 
-            {{commit.commit.author.date.split('T')[1]}} </p>
-                <hr class="mt-0">
-                {{commit.commit.message}}
+
+            <div class="commits-column">
+                <div class="card m-3 mt-5 p-3 commit-card" v-for="commit in commits" :key="commit">
+                    {{commit.commit.author.name}} <br> 
+                    <p>{{commit.commit.author.date.split('T')[0]}} 
+                    {{commit.commit.author.date.split('T')[1]}} </p>
+                    <hr class="mt-0">
+                    {{commit.commit.message}}
+                </div>
             </div>
+            
         </div>
         
 
@@ -91,4 +95,15 @@ export default {
   .commit-card p {
       color:rgb(11, 243, 88);
   }
+
+  .commits-column {
+    height:100%;
+    overflow-y: scroll;
+
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+    .commits-column::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
 </style>

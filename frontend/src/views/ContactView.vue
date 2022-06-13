@@ -1,5 +1,5 @@
 <template>
-  <div class="contact p-3">
+  <div class="container contact p-3" style="max-width:800px">
     <form class="container-lg h-100" action="POST">
       <h1 class="text-center">Get in Contact with Me</h1>
 
