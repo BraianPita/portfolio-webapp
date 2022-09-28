@@ -58,7 +58,7 @@ export default {
             <p>Posted on: {{this.post_data.date_posted.toLocaleString('en-us').split('T')[0]}} <!-- -- {{this.post_data}}-->   </p>
             <hr>
 
-            <img :src="this.post_data.img_url" alt="Main Image" class="img-fluid">
+            <img v-if="this.post_data.img_url" :src="this.post_data.img_url" alt="Main Image" class="img-fluid">
 
             <div v-html="markdownToHTML(this.post_data.content)" class="lead"></div>
         </div>

@@ -53,6 +53,7 @@ export default {
 
   .card-img-top {
     border-radius: 10px 10px 0 0;
+    height: 50%;
   }
 
   .project-active::before {
