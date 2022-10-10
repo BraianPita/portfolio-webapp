@@ -21,7 +21,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
 // define port
-const port = 3001;
+const port = process.env.PORT || 3000;
 
 // MongoDB Connection
 // get secret connection string from env variable
