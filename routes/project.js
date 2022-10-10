@@ -2,8 +2,8 @@ const router = require("express").Router();
 const axios = require("axios");
 
 // Get mongoose model for handling schema
-const projectModel = require('../models/Project');
-const commitModel = require('../models/Commit')
+const projectModel = require('../models/project');
+const commitModel = require('../models/commit');
 
 // this route is equivalent to "/clients" post method
 router.post("/", (req, res, next) => {

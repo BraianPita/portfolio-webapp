@@ -1,11 +1,11 @@
 const router = require("express").Router();
 const axios = require('axios');
 var fs = require('fs');
-var github_info = require('./exclude.github_response.json')
+var github_info = require('./exclude.github_response.json');
 
 
-const commitModel = require('../models/Commit');
-const projectModel = require('../models/Project');
+const commitModel = require('../models/commit');
+const projectModel = require('../models/project');
 
 // get all workers
 router.get("/", async function(req, res, next) { //gets all workers
