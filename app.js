@@ -28,6 +28,8 @@ const port = 3001;
 let connectionString = process.env.MONGO_URL;
 let dbName = 'Portfolio';
 
+
+
 // setup mongoose connection to MongoDB database
 mongoose
     .connect(connectionString + '/' + dbName, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -50,8 +52,19 @@ mongoose
                 let routerFile = require('./routes/' + file);
 
                 // custom routers as middleware
-                app.use("/" + file.replace('.js', ''), routerFile)
+                app.use("/api/" + file.replace('.js', ''), routerFile)
             });
+
+
+            // FRONTEND
+            const path = require('path');
+            // Serve static files from the React frontend app
+            app.use(express.static(path.join(__dirname, 'frontend/dist')));
+
+            // Anything that doesn't match the above, send back index.html
+            app.get('*', (req, res) => {
+                res.sendFile(path.join(__dirname + '/frontend/dist/index.html'))
+            })
 
             app.listen(port, () => console.log(`Listening to port ${port}`));
 
@@ -63,6 +76,8 @@ mongoose
     .catch((err) => {
         console.error("Mongo Connection Error", err);
     });
+
+
 
 
 

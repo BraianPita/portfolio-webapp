@@ -25,6 +25,7 @@ router.get("/", (req, res, next) => {
             next(err);
         }
         else {
+            console.log("get blogpost")
             res.json(data);
         }
     });
